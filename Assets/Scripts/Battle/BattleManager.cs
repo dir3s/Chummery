@@ -64,7 +64,10 @@ public class BattleManager : MonoBehaviour
 
 
 
-
+    float EaseOutQuad(float t)
+    {
+        return t * (2f - t);
+    }
 
 
 
@@ -74,19 +77,22 @@ public class BattleManager : MonoBehaviour
         playerTurn = false;
 
         Vector3 attackPos = enemyTransform.position + new Vector3(-1f, 0, 0);
-
+        
 
         float t = 0;
         while (t < 1)
         {
-            t += Time.deltaTime * 5f;
-            playerTransform.position = Vector3.Lerp(playerStartPos, attackPos, t);
+            t += Time.deltaTime;
+            float eased = EaseOutQuad(t);
+            playerTransform.position = Vector3.Lerp(playerStartPos, attackPos, eased);
             yield return null;
         }
 
         yield return new WaitForSeconds(0.2f);
         int damage = 20;
         enemy.TakeDamage(damage);
+
+        CameraShake.Instance.Shake(0.15f, 0.2f);
         StartCoroutine(Shake(enemyTransform));
 
         yield return new WaitForSeconds(0.3f);
@@ -119,8 +125,9 @@ public class BattleManager : MonoBehaviour
         float t = 0;
         while (t < 1)
         {
-            t += Time.deltaTime * 5f;
-            enemyTransform.position = Vector3.Lerp(startPos, attackPos, t);
+            t += Time.deltaTime;
+            float eased = EaseOutQuad(t);
+            enemyTransform.position = Vector3.Lerp(startPos, attackPos, eased);
             yield return null;
         }
 
@@ -130,6 +137,7 @@ public class BattleManager : MonoBehaviour
         int damage = 15;
         player.TakeDamage(damage);
 
+        CameraShake.Instance.Shake(0.15f, 0.15f);
         StartCoroutine(Shake(playerTransform));
 
         yield return new WaitForSeconds(0.3f);
