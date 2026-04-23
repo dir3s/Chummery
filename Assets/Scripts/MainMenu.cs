@@ -38,7 +38,14 @@ public class MainMenu : MonoBehaviour
 
     public void OnStartButtonClick()
     {
-        SceneManager.LoadScene(startSceneName);
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadScene(startSceneName);
+        }
+        else
+        {
+            Debug.LogError("Критична помилка: SceneTransitionManager не знайдено на сцені! Перевір ієрархію.");
+        }
     }
 
     public void OnVolumeChanged(float value)
