@@ -95,6 +95,13 @@ public class BattleManager : MonoBehaviour
         CameraShake.Instance.Shake(0.15f, 0.2f);
         StartCoroutine(Shake(enemyTransform));
 
+        player.currentMana += 2;
+
+        if (player.currentMana > player.maxMana)
+            player.currentMana = player.maxMana;
+        UIManager.Instance.RefreshUI();
+        Debug.Log("Player gained 2 mana. Mana: " + player.currentMana);
+
         yield return new WaitForSeconds(0.3f);
 
 

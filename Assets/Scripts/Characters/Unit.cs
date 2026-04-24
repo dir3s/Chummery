@@ -6,6 +6,9 @@ public class Unit : MonoBehaviour
     public int maxHP = 100;
     public int currentHP;
 
+    public int maxMana = 10;
+    public int currentMana;
+
     public HPBar hpBar;
 
 
@@ -13,6 +16,7 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         currentHP = maxHP;
+        currentMana = maxMana;
 
         if (hpBar != null)
             hpBar.SetMaxHP(maxHP);
