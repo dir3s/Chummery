@@ -48,7 +48,7 @@ public class SceneTransitionManager : MonoBehaviour
         yield return StartCoroutine(PerformTransition(0));
     }
 
-    private IEnumerator PerformTransition(float targetAlpha)
+    public IEnumerator PerformTransition(float targetAlpha)
     {
         float startAlpha = faderCanvasGroup.alpha;
         float elapsed = 0;

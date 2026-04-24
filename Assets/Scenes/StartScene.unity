@@ -273,6 +273,117 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &636948848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 636948850}
+  - component: {fileID: 636948849}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &636948849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636948848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a418da56312f8f64aa391e889a2ae3e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueController
+  firstNode: {fileID: 11400000, guid: 0424955e9e2e52f49bcc5a85bb30d2d7, type: 2}
+  backgroundDisplay: {fileID: 321502604}
+  textDisplay: {fileID: 1525059557}
+  choiceRoot: {fileID: 780060667}
+  buttonPrefab: {fileID: 4121655931930537200, guid: a4329934f788c41438cf10628de38338, type: 3}
+--- !u!4 &636948850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636948848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 764.69653, y: 508.02667, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &780060666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780060667}
+  - component: {fileID: 780060668}
+  m_Layer: 5
+  m_Name: ChoiceContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &780060667
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780060666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650494181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 720, y: 210}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &780060668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780060666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 20
+    m_Right: 20
+    m_Top: 20
+    m_Bottom: 20
+  m_ChildAlignment: 0
+  m_Spacing: 20
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1289263143
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,16 +517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0413\u0443\u0440\u0442\u043E\u0436\u0438\u0442\u043E\u043A. \u0412\u0435\u0447\u0456\u0440.
-    \u0414\u043E\u0432\u0433\u0438\u0439 \u043A\u043E\u0440\u0438\u0434\u043E\u0440,
-    \u0442\u0443\u0441\u043A\u043B\u0435 \u043E\u0441\u0432\u0456\u0442\u043B\u0435\u043D\u043D\u044F,
-    \u0456\u0437 \u043A\u0456\u043C\u043D\u0430\u0442 \u0447\u0443\u0442\u043D\u043E
-    \u0448\u0443\u043C\r\n\r\n\u0423\u0441\u0435\u0440\u0435\u0434\u0438\u043D\u0456
-    \u043F\u0430\u0445\u043D\u0435 \u043F\u0438\u043B\u043E\u043C, \u0434\u0435\u0448\u0435\u0432\u0438\u043C
-    \u043E\u0441\u0432\u0456\u0436\u0443\u0432\u0430\u0447\u0435\u043C \u043F\u043E\u0432\u0456\u0442\u0440\u044F
-    \u0456\u2026 \u0447\u0438\u043C\u043E\u0441\u044C \u0434\u0438\u0432\u043D\u0438\u043C.\r\n\u041D\u0430\u0447\u0435
-    \u0446\u0435 \u043C\u0456\u0441\u0446\u0435 \u0436\u0438\u0432\u0435 \u0441\u0432\u043E\u0457\u043C
-    \u0436\u0438\u0442\u0442\u044F\u043C."
+  m_text: "\u0413\u0443\u0440\u0442\u043E\u0436\u0438\u0442\u043E\u043A. \u0412\u0435\u0447\u0456\u0440. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 64dcf402ec7991c40a7d8fe671f08bf8, type: 2}
   m_sharedMaterial: {fileID: -5645651005855395270, guid: 64dcf402ec7991c40a7d8fe671f08bf8, type: 2}
@@ -592,6 +694,7 @@ RectTransform:
   m_Children:
   - {fileID: 321502603}
   - {fileID: 1289263144}
+  - {fileID: 780060667}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -698,3 +801,4 @@ SceneRoots:
   - {fileID: 1781639934}
   - {fileID: 1650494181}
   - {fileID: 414266804}
+  - {fileID: 636948850}
