@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GlassBlur 1
+  m_Name: BlurForChoises
   m_Shader: {fileID: 4800000, guid: 523382e1a23f30f4ebe16f01663df468, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -30,13 +30,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _EdgeSoftness: 0.1
-    - _OutlineThickness: 0.293
+    - _OutlineThickness: 0.35
     - _OutlineWidth: 0.574
     - _Radius: 11.9
     - _ShadowSize: 0.02
     m_Colors:
     - _Color: {r: 0.3735848, g: 0.33481658, b: 0.33481658, a: 0.019607844}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0.047058824}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0.76862746}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
