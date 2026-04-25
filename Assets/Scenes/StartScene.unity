@@ -307,6 +307,8 @@ MonoBehaviour:
   textDisplay: {fileID: 1525059557}
   choiceRoot: {fileID: 780060667}
   buttonPrefab: {fileID: 4121655931930537200, guid: a4329934f788c41438cf10628de38338, type: 3}
+  typingSpeed: 0.04
+  punctuationPause: 0.4
 --- !u!4 &636948850
 Transform:
   m_ObjectHideFlags: 0
