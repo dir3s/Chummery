@@ -7,4 +7,5 @@ public class Ability
     public string description;
     public int damage;
     public int manaCost;
+    public Sprite abilitySprite;
 }

@@ -11,16 +11,30 @@ public class Unit : MonoBehaviour
 
     public HPBar hpBar;
 
+    public Sprite idleSprite;
 
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+
+
         currentHP = maxHP;
         currentMana = maxMana;
 
         if (hpBar != null)
             hpBar.SetMaxHP(maxHP);
     }
+
+    public void SetSprite(Sprite newSprite)
+    {
+        spriteRenderer.sprite = newSprite;
+    }
+
+
+
 
     public void TakeDamage(int damage)
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-
+using System.Collections;
 public class AbilityManager : MonoBehaviour
 {
     public BattleManager battle;
@@ -10,6 +10,12 @@ public class AbilityManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public GameObject abilitiesPanel;
+
+    public GameObject attackButton;
+    public GameObject endTurnButton;
+    public GameObject abilitiesButton;
+    public GameObject ManaBar_BG;
+
     private bool isOpen = false;
 
     public Ability[] abilities;
@@ -45,27 +51,79 @@ public class AbilityManager : MonoBehaviour
     }
 
 
-
     public void UseAbility(int index)
     {
+        StartCoroutine(UseAbilityRoutine(index));
+    }
+
+    IEnumerator UseAbilityRoutine(int index)
+    {
+        UIManager.Instance.HideBattleUI();
+        var player = BattleManager.Instance.player;
+        var enemy = BattleManager.Instance.enemy;
         Ability ability = abilities[index];
 
         if (battle.player.currentMana < ability.manaCost)
         {
             Debug.Log("Not enough mana!");
-            return;
+            yield break;
         }
+
+        Vector3 startPos = player.transform.position;
+        Vector3 attackPos = enemy.transform.position + new Vector3(-1f, 0, 0);
+
+
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime;
+            float eased = t * (2f - t);
+
+            player.transform.position =
+                Vector3.Lerp(startPos, attackPos, eased);
+
+            yield return null;
+        }
+
+        player.SetSprite(ability.abilitySprite);
+
+        yield return new WaitForSeconds(0.2f);
+
 
         battle.player.currentMana -= ability.manaCost;
         UIManager.Instance.RefreshUI();
-        battle.enemy.TakeDamage(ability.damage);
 
-        Debug.Log("Used ability: " + ability.name +
-                  " | Mana left: " + battle.player.currentMana);
+        enemy.TakeDamage(ability.damage);
 
+        CameraShake.Instance.Shake(0.15f, 0.2f);
+        StartCoroutine(BattleManager.Instance.Shake(enemy.transform));
+
+        yield return new WaitForSeconds(0.3f);
+
+
+        t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * 5f;
+
+            player.transform.position =
+                Vector3.Lerp(attackPos, startPos, t);
+
+            yield return null;
+        }
+
+
+        player.SetSprite(player.idleSprite);
+        yield return new WaitForSeconds(0.3f);
+        UIManager.Instance.ShowBattleUI();
         DisableAbilities();
+        CloseAbilities();
+        
         battle.EndPlayerTurn();
     }
+
+
+
 
     public void HighlightButton(GameObject button)
     {
@@ -97,6 +155,11 @@ public class AbilityManager : MonoBehaviour
         abilitiesGroup.blocksRaycasts = true;
         abilitiesGroup.alpha = 1f;
         isOpen = true;
+
+        attackButton.SetActive(false);
+        endTurnButton.SetActive(false);
+        abilitiesButton.SetActive(false);
+        ManaBar_BG.SetActive(false);
     }
 
     public void CloseAbilities()
@@ -105,6 +168,12 @@ public class AbilityManager : MonoBehaviour
         abilitiesGroup.interactable = false;
         abilitiesGroup.blocksRaycasts = false;
         abilitiesGroup.alpha = 0.3f;
+
+        attackButton.SetActive(true);
+        endTurnButton.SetActive(true);
+        abilitiesButton.SetActive(true);
+        ManaBar_BG.SetActive(true);
+
         isOpen = false;
     }
 }

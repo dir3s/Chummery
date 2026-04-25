@@ -10,11 +10,8 @@ public class BattleManager : MonoBehaviour
     public Unit player;
     public Unit enemy;
 
-
-    public Transform playerTransform;
-    public Transform enemyTransform;
-
     private Vector3 playerStartPos;
+    private Vector3 enemyStartPos;
 
     private void Awake()
     {
@@ -23,7 +20,8 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-        playerStartPos = playerTransform.position;
+        playerStartPos = player.transform.position;
+        enemyStartPos = enemy.transform.position;
 
         StartPlayerTurn();
     }
@@ -46,7 +44,6 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Enemy attacks!");
         StartCoroutine(EnemyAttackRoutine());
-
     }
 
     public void PlayerAttack()
@@ -55,122 +52,114 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(PlayerAttackRoutine());
     }
 
-
-
-
-
-
-
-
-
-
     float EaseOutQuad(float t)
     {
         return t * (2f - t);
     }
 
-
-
-
     IEnumerator PlayerAttackRoutine()
     {
         playerTurn = false;
-
-        Vector3 attackPos = enemyTransform.position + new Vector3(-1f, 0, 0);
-        
+        UIManager.Instance.HideBattleUI();
+        Vector3 startPos = player.transform.position;
+        Vector3 attackPos = enemy.transform.position + new Vector3(-1f, 0, 0);
 
         float t = 0;
+
+
         while (t < 1)
         {
             t += Time.deltaTime;
             float eased = EaseOutQuad(t);
-            playerTransform.position = Vector3.Lerp(playerStartPos, attackPos, eased);
+
+            player.transform.position =
+                Vector3.Lerp(startPos, attackPos, eased);
+
             yield return null;
         }
 
         yield return new WaitForSeconds(0.2f);
-        int damage = 20;
-        enemy.TakeDamage(damage);
+
+
+        enemy.TakeDamage(20);
 
         CameraShake.Instance.Shake(0.15f, 0.2f);
-        StartCoroutine(Shake(enemyTransform));
+        StartCoroutine(Shake(enemy.transform));
+
 
         player.currentMana += 2;
-
-        if (player.currentMana > player.maxMana)
-            player.currentMana = player.maxMana;
+        player.currentMana = Mathf.Min(player.currentMana, player.maxMana);
         UIManager.Instance.RefreshUI();
-        Debug.Log("Player gained 2 mana. Mana: " + player.currentMana);
-
         yield return new WaitForSeconds(0.3f);
+
+        
 
 
         t = 0;
+
         while (t < 1)
         {
             t += Time.deltaTime * 5f;
-            playerTransform.position = Vector3.Lerp(attackPos, playerStartPos, t);
+
+            player.transform.position =
+                Vector3.Lerp(attackPos, startPos, t);
+
             yield return null;
         }
-
-        yield return new WaitForSeconds(0.2f);
 
         EndPlayerTurn();
     }
 
-
-
-
     IEnumerator EnemyAttackRoutine()
     {
         playerTurn = false;
+        UIManager.Instance.HideBattleUI();
+        Vector3 startPos = enemy.transform.position;
+        Vector3 attackPos = player.transform.position + new Vector3(1f, 0, 0);
 
-        Vector3 startPos = enemyTransform.position;
-        Vector3 attackPos = playerTransform.position + new Vector3(1f, 0, 0);
-
-        
         float t = 0;
+
+
         while (t < 1)
         {
             t += Time.deltaTime;
             float eased = EaseOutQuad(t);
-            enemyTransform.position = Vector3.Lerp(startPos, attackPos, eased);
+
+            enemy.transform.position =
+                Vector3.Lerp(startPos, attackPos, eased);
+
             yield return null;
         }
 
-       
         yield return new WaitForSeconds(0.2f);
 
-        int damage = 15;
-        player.TakeDamage(damage);
+
+        player.TakeDamage(15);
 
         CameraShake.Instance.Shake(0.15f, 0.15f);
-        StartCoroutine(Shake(playerTransform));
-
-        yield return new WaitForSeconds(0.3f);
+        StartCoroutine(Shake(player.transform));
 
         
+        yield return new WaitForSeconds(0.3f);
+
+
         t = 0;
+
         while (t < 1)
         {
             t += Time.deltaTime * 5f;
-            enemyTransform.position = Vector3.Lerp(attackPos, startPos, t);
+
+            enemy.transform.position =
+                Vector3.Lerp(attackPos, startPos, t);
+
             yield return null;
         }
-
         yield return new WaitForSeconds(0.2f);
-
+        UIManager.Instance.ShowBattleUI();
         StartPlayerTurn();
     }
 
-
-
-
-
-
-
-
-    IEnumerator Shake(Transform target)
+    public IEnumerator Shake(Transform target)
     {
         Vector3 originalPos = target.position;
 
@@ -192,5 +181,4 @@ public class BattleManager : MonoBehaviour
 
         target.position = originalPos;
     }
-
 }

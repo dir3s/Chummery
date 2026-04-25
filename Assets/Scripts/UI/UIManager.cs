@@ -8,8 +8,14 @@ public class UIManager : MonoBehaviour
     public Button abilitiesButton;
     public TMPro.TextMeshProUGUI manaText;
     public UnityEngine.UI.Image manaBar_Fill;
+    public TMPro.TextMeshProUGUI manaText2;
+    public UnityEngine.UI.Image manaBar_Fill2;
     public static UIManager Instance;
-
+    public GameObject manaUI;
+    public GameObject attackButtonObj;
+    public GameObject endTurnButtonObj;
+    public GameObject abilitiesButtonObj;
+    public GameObject abilitiesPanel;
 
     private void Awake()
     {
@@ -42,26 +48,45 @@ public class UIManager : MonoBehaviour
         endTurnButton.interactable = isPlayerTurn;
         abilitiesButton.interactable = isPlayerTurn;
 
-        manaText.text = "Mana: " + BattleManager.Instance.player.currentMana;
+        manaText.text = ""+BattleManager.Instance.player.currentMana;
+
+        manaText2.text = "" + BattleManager.Instance.player.currentMana;
 
 
         float fill = (float)BattleManager.Instance.player.currentMana /
              BattleManager.Instance.player.maxMana;
 
         manaBar_Fill.fillAmount = fill;
-        Debug.Log("Fill: " + fill);
+        manaBar_Fill2.fillAmount = fill;
+
     }
 
     public void RefreshUI()
     {
         var player = BattleManager.Instance.player;
 
-        manaText.text = "Mana: " + player.currentMana;
+        manaText.text = "" + player.currentMana;
 
         float fill = (float)player.currentMana / player.maxMana;
         manaBar_Fill.fillAmount = fill;
+        manaBar_Fill2.fillAmount = fill;
+
+    }
+    public void HideBattleUI()
+    {
+        attackButtonObj.SetActive(false);
+        endTurnButtonObj.SetActive(false);
+        abilitiesButtonObj.SetActive(false);
+        abilitiesPanel.SetActive(false);
+        manaUI.SetActive(false);
     }
 
+    public void ShowBattleUI()
+    {
+        attackButtonObj.SetActive(true);
+        endTurnButtonObj.SetActive(true);
+        abilitiesButtonObj.SetActive(true);
 
-
+        manaUI.SetActive(true);
+    } 
 }
