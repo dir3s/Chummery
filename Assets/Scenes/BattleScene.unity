@@ -691,6 +691,7 @@ MonoBehaviour:
   playerTurn: 1
   player: {fileID: 1200642563}
   enemy: {fileID: 909131626}
+  dodgeSprite: {fileID: 1354751209719697281, guid: 80354c114c4557c4badf817bd5f2438f, type: 3}
 --- !u!4 &277702567
 Transform:
   m_ObjectHideFlags: 0
@@ -2438,7 +2439,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9096683780681421817, guid: dca39065f9b5e244eb5e92d429f0fe01, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.9647059}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5232,7 +5233,7 @@ MonoBehaviour:
       \u043F\u043E \u043E\u0431\u043B\u0438\u0447\u0447\u044E"
     damage: 10
     manaCost: 3
-    abilitySprite: {fileID: -8468551184017497215, guid: 068ae2f647a869240967cde9e297ec54, type: 3}
+    abilitySprite: {fileID: 5262284576004738879, guid: 458e041850d0a8c4ca6b1ac810c4b1c1, type: 3}
   - name: Heavy Strike
     description: "\u043F\u043E\u0442\u0443\u0436\u043D\u0438\u0439 \u0443\u0434\u0430\u0440
       \u043D\u043E\u0433\u043E\u044E \u0432 \u0433\u043E\u043B\u043E\u0432\u0443"
@@ -5244,7 +5245,7 @@ MonoBehaviour:
       \u043A\u0430\u0440\u0430\u0442\u0435"
     damage: 40
     manaCost: 7
-    abilitySprite: {fileID: -8468551184017497215, guid: 068ae2f647a869240967cde9e297ec54, type: 3}
+    abilitySprite: {fileID: 1228367190767337788, guid: a5b82163b2a1ce941932a1d7bf70ca45, type: 3}
 --- !u!4 &1874165989
 Transform:
   m_ObjectHideFlags: 0

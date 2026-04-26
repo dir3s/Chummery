@@ -18,6 +18,8 @@ public class BattleManager : MonoBehaviour
     private Vector3 playerStartPos;
     private Vector3 enemyStartPos;
 
+    [SerializeField] private Sprite dodgeSprite;
+
     private void Awake()
     {
         Instance = this;
@@ -210,8 +212,13 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator DodgeMove(Transform target)
     {
+        var player = BattleManager.Instance.player;
+
+
+        player.SetSprite(dodgeSprite);
+
         Vector3 startPos = target.position;
-        Vector3 dodgePos = startPos + new Vector3(-2f, -1f, 0); 
+        Vector3 dodgePos = startPos + new Vector3(-2f, -1f, 0);
 
         float t = 0;
 
@@ -226,15 +233,16 @@ public class BattleManager : MonoBehaviour
 
         t = 0;
 
-
         while (t < 1)
         {
             t += Time.deltaTime * 4f;
             target.position = Vector3.Lerp(dodgePos, startPos, t);
             yield return null;
         }
-    }
 
+
+        player.SetSprite(player.idleSprite); 
+    }
     private void Update()
     {
         if (canDodge && Keyboard.current.spaceKey.wasPressedThisFrame)
