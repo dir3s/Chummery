@@ -66,6 +66,7 @@ public class AbilityManager : MonoBehaviour
         if (battle.player.currentMana < ability.manaCost)
         {
             Debug.Log("Not enough mana!");
+            UIManager.Instance.ShowBattleUI();
             yield break;
         }
 
