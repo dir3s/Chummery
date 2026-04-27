@@ -18,7 +18,13 @@ public class BattleManager : MonoBehaviour
     private Vector3 playerStartPos;
     private Vector3 enemyStartPos;
 
+    [SerializeField] private Sprite idleSpriteEnemy;
+    [SerializeField] private Sprite idleSpritePlayer;
+
     [SerializeField] private Sprite dodgeSprite;
+
+    [SerializeField] private Sprite hitSprite;
+    [SerializeField] private Sprite hitSpritePlayer;
 
     private void Awake()
     {
@@ -84,6 +90,7 @@ public class BattleManager : MonoBehaviour
 
             yield return null;
         }
+        player.SetSprite(hitSpritePlayer);
 
         yield return new WaitForSeconds(0.2f);
 
@@ -113,7 +120,7 @@ public class BattleManager : MonoBehaviour
 
             yield return null;
         }
-
+        player.SetSprite(idleSpritePlayer);
         EndPlayerTurn();
     }
 
@@ -143,11 +150,11 @@ public class BattleManager : MonoBehaviour
         dodged = false;
 
         Debug.Log("DODGE NOW!");
-
+        enemy.SetSprite(hitSprite);
         yield return new WaitForSeconds(0.5f);
 
         canDodge = false;
-
+        
 
         if (dodged)
         {
@@ -181,7 +188,7 @@ public class BattleManager : MonoBehaviour
 
             yield return null;
         }
-
+        enemy.SetSprite(idleSpriteEnemy);
         UIManager.Instance.ShowBattleUI();
 
         StartPlayerTurn();
