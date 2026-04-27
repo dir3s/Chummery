@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransitionManager
   faderCanvasGroup: {fileID: 857566350}
-  fadeDuration: 0.7
+  fadeDuration: 0.5
   glitchEffect: 0
 --- !u!4 &1601796898
 Transform:
