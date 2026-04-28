@@ -58,12 +58,19 @@ public class PlayerMovement : MonoBehaviour
 
         float speed = Keyboard.current.leftShiftKey.isPressed ? runSpeed : walkSpeed;
 
-        Vector3 move = cameraTransform.forward * moveInput.y +
-                        cameraTransform.right * moveInput.x;
 
-        move.y = 0f;
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
 
-        controller.Move(move.normalized * speed * Time.deltaTime);
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 move = forward * moveInput.y + right * moveInput.x;
+
+        controller.Move(move * speed * Time.deltaTime);
 
 
         if (isGrounded && verticalVelocity < 0)

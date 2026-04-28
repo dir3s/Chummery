@@ -12,10 +12,22 @@ public class Look : MonoBehaviour
 
     private Vector2 lookInput;
 
+
+    [Header("Head Bob")]
+    public float walkBobSpeed = 8f;
+    public float walkBobAmount = 0.05f;
+
+    public float runBobSpeed = 12f;
+    public float runBobAmount = 0.1f;
+
+    private float bobTimer;
+    private Vector3 initialCamPos;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        initialCamPos = cameraPivot.localPosition;
     }
 
     void Update()
@@ -30,6 +42,7 @@ public class Look : MonoBehaviour
 
         cameraPivot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+        HandleHeadBob();
     }
 
     Vector2 LookInput()
@@ -41,4 +54,37 @@ public class Look : MonoBehaviour
 
         return mouse.delta.ReadValue() * 0.002f;
     }
+
+
+    void HandleHeadBob()
+    {
+        var keyboard = Keyboard.current;
+
+        bool isMoving = keyboard.wKey.isPressed || keyboard.aKey.isPressed ||
+                        keyboard.sKey.isPressed || keyboard.dKey.isPressed;
+
+        if (!isMoving)
+        {
+            
+            cameraPivot.localPosition = Vector3.Lerp(
+                cameraPivot.localPosition,
+                initialCamPos,
+                Time.deltaTime * 5f
+            );
+            return;
+        }
+
+        bool isRunning = keyboard.leftShiftKey.isPressed;
+
+        float speed = isRunning ? runBobSpeed : walkBobSpeed;
+        float amount = isRunning ? runBobAmount : walkBobAmount;
+
+        bobTimer += Time.deltaTime * speed;
+
+        float bobY = Mathf.Sin(bobTimer) * amount;
+        float bobX = Mathf.Cos(bobTimer / 2f) * amount;
+
+        cameraPivot.localPosition = initialCamPos + new Vector3(bobX, bobY, 0f);
+    }
+
 }
