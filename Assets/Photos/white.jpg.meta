@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 86ed3f109a8ee0140b209518e0f49b13
+guid: 40a697baee2517343806ae02a2e776dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6896317016289036025
-    second: coridor1a_0
+      213: 6451999518886478860
+    second: istockphoto-2147589548-612x612_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coridor1a_0
+      name: istockphoto-2147589548-612x612_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2736
-        height: 1529
+        width: 612
+        height: 383
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7093c91463c5b40a0800000000000000
-      internalID: -6896317016289036025
+      spriteID: c044836d06b1a8950800000000000000
+      internalID: 6451999518886478860
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      coridor1a_0: -6896317016289036025
+      istockphoto-2147589548-612x612_0: 6451999518886478860
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
