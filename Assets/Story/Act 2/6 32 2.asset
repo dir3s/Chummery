@@ -19,4 +19,4 @@ MonoBehaviour:
     \u0431\u0443\u0434\u0435.\n\u041F\u0456\u0448\u043B\u0438, \u043C\u0438 \u0432\u0436\u0435
     \u043C\u0430\u0439\u0436\u0435 \u043D\u0430 \u043C\u0456\u0441\u0446\u0456..."
   choices: []
-  nextLinearNode: {fileID: 11400000, guid: fda9c40edf751314680d615ca61ac228, type: 2}
+  nextLinearNode: {fileID: 0}
