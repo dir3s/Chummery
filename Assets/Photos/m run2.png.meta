@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 9c6a38677c43cd24c936f99e74122f34
+guid: 56571d6cef921424f9efe06ff7203781
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1608380283287304995
-    second: mrun2_0
+      213: -8523083376486897193
+    second: m run2_0
+  - first:
+      213: -2551903330551547059
+    second: m run2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 150
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mrun2_0
+      name: m run2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 452
-        height: 535
+        width: 301
+        height: 414
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd40be667a2eda9e0800000000000000
-      internalID: -1608380283287304995
+      spriteID: 7d9267983dce7b980800000000000000
+      internalID: -8523083376486897193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: m run2_1
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 390
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4bb6510171d59cd0800000000000000
+      internalID: -2551903330551547059
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mrun2_0: -1608380283287304995
+      m run2_0: -8523083376486897193
+      m run2_1: -2551903330551547059
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
