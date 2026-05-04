@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
-  m_Name: 17
+  m_Name: act3_17
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
   dialogueText: "\u0410\u043B\u044F \u0440\u043E\u0431\u0438\u0442\u044C \u0433\u043B\u0438\u0431\u043E\u043A\u0438\u0439
@@ -23,6 +23,6 @@ MonoBehaviour:
     \u0440\u043E\u0437\u0445\u043E\u0434\u0438\u0442\u044C\u0441\u044F \u043A\u043E\u0440\u0438\u0434\u043E\u0440\u043E\u043C,
     \u0437\u0432\u0443\u0447\u0430\u0447\u0438 \u0437\u0430\u043D\u0430\u0434\u0442\u043E
     \u0433\u043E\u043B\u043E\u0441\u043D\u043E \u0432 \u0446\u0456\u0439 \u0433\u043B\u0443\u0445\u0456\u0439
-    \u0442\u0438\u0448\u0456."
+    \u0442\u0438\u0448\u0456..."
   choices: []
   nextLinearNode: {fileID: 0}

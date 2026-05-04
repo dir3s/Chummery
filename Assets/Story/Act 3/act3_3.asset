@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
-  m_Name: 3
+  m_Name: act3_3
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
   dialogueText: "\u0413\u0435\u0439... \u0422\u0438 \u0442\u0430\u043C \u0449\u0435

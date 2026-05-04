@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dc4fbe974a2317c458183a434a8d1bcf
+guid: 6efc71ae47195ba44ae5ccc6ee49d090
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6152723073977981858
-    second: coridor_opendoor_0
+      213: -8234536430552275792
+    second: door2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coridor_opendoor_0
+      name: door2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1672
-        height: 940
+        height: 941
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e54613676f22d9aa0800000000000000
-      internalID: -6152723073977981858
+      spriteID: 0b42beeaebc09bd80800000000000000
+      internalID: -8234536430552275792
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      coridor_opendoor_0: -6152723073977981858
+      door2_0: -8234536430552275792
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
