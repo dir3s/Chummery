@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
   m_Name: Node_013
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  speakerName: "\u0410\u043B\u044F"
   background: {fileID: 6904444990699376935, guid: 871fd644bb4f76b4baa75a6e8f90e814, type: 3}
-  dialogueText: "\u0410\u043B\u044F: \u2014 \u041E, \u043D\u043E\u0432\u0435\u043D\u044C\u043A\u0438\u0439?
+  dialogueText: "\u041E, \u043D\u043E\u0432\u0435\u043D\u044C\u043A\u0438\u0439?
     \u0427\u043E\u0433\u043E \u0442\u0430\u043A\u0438\u0439 \u043D\u0430\u043B\u044F\u043A\u0430\u043D\u0438\u0439?
     \u0422\u0430 \u043D\u0435 \u043F\u0435\u0440\u0435\u0439\u043C\u0430\u0439\u0441\u044F,
     \u0446\u0435 \u043C\u0456\u0441\u0446\u0435 \u043F\u0440\u043E\u0441\u0442\u043E
