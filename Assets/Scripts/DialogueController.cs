@@ -29,6 +29,19 @@ public class DialogueController : MonoBehaviour
     private string fullText;
     private Coroutine typingCoroutine;
 
+    public static DialogueController Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void SetTypingSpeed(float value)
+    {
+        typingSpeed = value;
+    }
+
+
     void Start()
     {
         if (firstNode != null) UpdateDialogueContent(firstNode);
