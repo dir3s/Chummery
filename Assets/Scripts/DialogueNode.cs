@@ -1,19 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// Це дозволить нам створювати нові кадри через меню правої кнопки миші
 [CreateAssetMenu(fileName = "NewDialogueNode", menuName = "Dialogue/Node")]
 public class DialogueNode : ScriptableObject
 {
+    [Header("Персонаж")]
+    public string speakerName;
+
     [Header("Візуал")]
-    public Sprite background; // Картинка фону
+    public Sprite background;
 
     [Header("Текст")]
     [TextArea(3, 10)]
-    public string dialogueText; // Основний текст кадру
+    public string dialogueText;
 
     [Header("Варіанти вибору")]
-    public List<Choice> choices; // Список кнопок-відповідей
+    public List<Choice> choices;
 
     [Header("Лінійний перехід")]
     public DialogueNode nextLinearNode;
@@ -22,6 +24,6 @@ public class DialogueNode : ScriptableObject
 [System.Serializable]
 public class Choice
 {
-    public string answerText;      // Що написано на кнопці
-    public DialogueNode nextNode; // Куди ми перейдемо після натискання
+    public string answerText;
+    public DialogueNode nextNode;
 }

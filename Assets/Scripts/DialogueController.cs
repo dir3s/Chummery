@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections;
-using System.Collections.Generic; // Додано для роботи зі списками
+using System.Collections.Generic;
 
 public class DialogueController : MonoBehaviour
 {
@@ -13,12 +13,15 @@ public class DialogueController : MonoBehaviour
     [Header("Посилання на UI")]
     public Image backgroundDisplay;
     public TextMeshProUGUI textDisplay;
+    // --- НОВА ЗМІНА ---
+    public TextMeshProUGUI speakerNameDisplay;
+    // ------------------
     public Transform choiceRoot;
     public GameObject buttonPrefab;
 
     [Header("Налаштування друку")]
     [SerializeField] private float typingSpeed = 0.04f;
-    [SerializeField] private float punctuationPause = 0.5f; // Пауза після . ! ?
+    [SerializeField] private float punctuationPause = 0.5f;
 
     private DialogueNode currentNode;
     private bool isTransitioning = false;
@@ -72,6 +75,19 @@ public class DialogueController : MonoBehaviour
     {
         currentNode = node;
         fullText = node.dialogueText;
+
+        if (speakerNameDisplay != null)
+        {
+            bool hasSpeaker = !string.IsNullOrEmpty(node.speakerName);
+
+            // Оновлюємо текст
+            speakerNameDisplay.text = hasSpeaker ? node.speakerName : "";
+
+            // ВАЖЛИВО: звертаємось до батьківського об'єкта (плашки), 
+            // щоб вона зникала повністю разом із фоном
+            speakerNameDisplay.transform.parent.gameObject.SetActive(hasSpeaker);
+        }
+
         if (node.background != null) backgroundDisplay.sprite = node.background;
 
         foreach (Transform child in choiceRoot) Destroy(child.gameObject);
@@ -90,10 +106,8 @@ public class DialogueController : MonoBehaviour
             char letter = sentence[i];
             textDisplay.text += letter;
 
-            // Логіка пауз після знаків припинання
             if (IsPunctuation(letter))
             {
-                // Перевіряємо, чи це не "..." (якщо наступний символ теж знак — не паузимо)
                 bool isEndOfPunctuation = (i + 1 >= sentence.Length) || !IsPunctuation(sentence[i + 1]);
 
                 if (isEndOfPunctuation)
@@ -115,7 +129,6 @@ public class DialogueController : MonoBehaviour
         CreateChoices();
     }
 
-    // Метод для перевірки знаків припинання
     private bool IsPunctuation(char c)
     {
         return c == '.' || c == '!' || c == '?' || c == '…';

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private string startSceneName = "StartScene";
+    [SerializeField] private string storySceneName = "StoryScene";
     [SerializeField] private List<GameObject> allPanels;
     [SerializeField] private Slider volumeSlider;
 
@@ -41,6 +42,18 @@ public class MainMenu : MonoBehaviour
         if (SceneTransitionManager.Instance != null)
         {
             SceneTransitionManager.Instance.LoadScene(startSceneName);
+        }
+        else
+        {
+            Debug.LogError("Критична помилка: SceneTransitionManager не знайдено на сцені! Перевір ієрархію.");
+        }
+    }
+
+    public void OnStoryButtonClick()
+    {
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadScene(storySceneName);
         }
         else
         {
