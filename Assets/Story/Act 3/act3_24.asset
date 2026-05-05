@@ -26,10 +26,12 @@ MonoBehaviour:
   choices:
   - answerText: "\u041F\u0440\u0438\u0432\u0456\u0442, \u044F \u0442\u0432\u0456\u0439
       \u043D\u043E\u0432\u0438\u0439 \u0441\u0443\u0441\u0456\u0434"
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: 3382a282ad059d046b6c0d13499caf27, type: 2}
   - answerText: "\u0422\u0438 \u0437\u0430\u0432\u0436\u0434\u0438 \u0442\u0430\u043A\u0430
       \u043F\u0440\u0438\u0454\u043C\u043D\u0430 \u0437 \u043D\u0435\u0437\u043D\u0430\u0439\u043E\u043C\u0446\u044F\u043C\u0438?"
-    nextNode: {fileID: 0}
+    nextNode: {fileID: 11400000, guid: 67fb7465a563ce44e83fa5b0d3c50175, type: 2}
   - answerText: "(\u041F\u0440\u043E\u043C\u043E\u0432\u0447\u0430\u0442\u0438)"
     nextNode: {fileID: 11400000, guid: e7374562f0e6a0048992a0728d8fd06f, type: 2}
   nextLinearNode: {fileID: 11400000, guid: 5357ab7e785286e418cf4f80bec172ca, type: 2}
+  nextScene: {fileID: 0}
+  nextSceneName: 

@@ -2,24 +2,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class DialogueController : MonoBehaviour
 {
-    [Header("Початкова нода")]
-    public DialogueNode firstNode;
+    public static DialogueController Instance;
 
-    [Header("Посилання на UI")]
+    public DialogueNode firstNode;
     public Image backgroundDisplay;
     public TextMeshProUGUI textDisplay;
-    // --- НОВА ЗМІНА ---
     public TextMeshProUGUI speakerNameDisplay;
-    // ------------------
     public Transform choiceRoot;
     public GameObject buttonPrefab;
 
-    [Header("Налаштування друку")]
     [SerializeField] private float typingSpeed = 0.04f;
     [SerializeField] private float punctuationPause = 0.5f;
 
@@ -29,18 +27,10 @@ public class DialogueController : MonoBehaviour
     private string fullText;
     private Coroutine typingCoroutine;
 
-    public static DialogueController Instance;
-
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
     }
-
-    public void SetTypingSpeed(float value)
-    {
-        typingSpeed = value;
-    }
-
 
     void Start()
     {
@@ -49,19 +39,38 @@ public class DialogueController : MonoBehaviour
 
     void Update()
     {
-        if (isTransitioning) return;
+        if (isTransitioning || PauseMenu.isPaused) return;
 
         bool inputPressed = (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
                             (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame);
 
         if (inputPressed)
         {
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null) return;
+
             if (isTyping) FinishTyping();
-            else if (currentNode != null && currentNode.choices.Count == 0 && currentNode.nextLinearNode != null)
+            else if (currentNode != null)
             {
-                DisplayNode(currentNode.nextLinearNode);
+                if (!string.IsNullOrEmpty(currentNode.nextSceneName))
+                {
+                    SceneTransitionManager.Instance.LoadScene(currentNode.nextSceneName);
+                    isTransitioning = true;
+                    return;
+                }
+
+                if (currentNode.choices.Count == 0 && currentNode.nextLinearNode != null)
+                {
+                    DisplayNode(currentNode.nextLinearNode);
+                }
             }
         }
+    }
+
+    public float GetCurrentTypingSpeed() => typingSpeed;
+
+    public void SetTypingSpeed(float value)
+    {
+        typingSpeed = value;
     }
 
     public void DisplayNode(DialogueNode node)
@@ -89,7 +98,6 @@ public class DialogueController : MonoBehaviour
         currentNode = node;
         fullText = node.dialogueText;
 
-
         if (DialogueSaveSystem.Instance != null)
         {
             DialogueSaveSystem.Instance.MarkVisited(node.nodeID);
@@ -98,20 +106,15 @@ public class DialogueController : MonoBehaviour
         if (speakerNameDisplay != null)
         {
             bool hasSpeaker = !string.IsNullOrEmpty(node.speakerName);
-
             speakerNameDisplay.text = hasSpeaker ? node.speakerName : "";
             speakerNameDisplay.transform.parent.gameObject.SetActive(hasSpeaker);
         }
 
-        if (node.background != null)
-            backgroundDisplay.sprite = node.background;
+        if (node.background != null) backgroundDisplay.sprite = node.background;
 
-        foreach (Transform child in choiceRoot)
-            Destroy(child.gameObject);
+        foreach (Transform child in choiceRoot) Destroy(child.gameObject);
 
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         typingCoroutine = StartCoroutine(TypeSentence(fullText));
     }
 
@@ -128,30 +131,16 @@ public class DialogueController : MonoBehaviour
             if (IsPunctuation(letter))
             {
                 bool isEndOfPunctuation = (i + 1 >= sentence.Length) || !IsPunctuation(sentence[i + 1]);
-
-                if (isEndOfPunctuation)
-                {
-                    yield return new WaitForSeconds(punctuationPause);
-                }
-                else
-                {
-                    yield return new WaitForSeconds(typingSpeed);
-                }
+                yield return new WaitForSeconds(isEndOfPunctuation ? punctuationPause : typingSpeed);
             }
-            else
-            {
-                yield return new WaitForSeconds(typingSpeed);
-            }
+            else yield return new WaitForSeconds(typingSpeed);
         }
 
         isTyping = false;
         CreateChoices();
     }
 
-    private bool IsPunctuation(char c)
-    {
-        return c == '.' || c == '!' || c == '?' || c == '…';
-    }
+    private bool IsPunctuation(char c) => c == '.' || c == '!' || c == '?' || c == '…';
 
     private void FinishTyping()
     {
