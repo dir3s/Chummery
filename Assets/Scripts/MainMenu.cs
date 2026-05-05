@@ -24,17 +24,13 @@ public class MainMenu : MonoBehaviour
     public void OpenPanel(GameObject panelToOpen)
     {
         if (panelToOpen != null)
-        {
             panelToOpen.SetActive(true);
-        }
     }
 
     public void ClosePanel(GameObject panelToClose)
     {
         if (panelToClose != null)
-        {
             panelToClose.SetActive(false);
-        }
     }
 
     public void OnStartButtonClick()
@@ -45,19 +41,15 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Критична помилка: SceneTransitionManager не знайдено на сцені! Перевір ієрархію.");
+            Debug.LogError("SceneTransitionManager not found!");
         }
     }
 
     public void OnStoryButtonClick()
     {
-        if (SceneTransitionManager.Instance != null)
+        if (MenuCameraController.Instance != null)
         {
-            SceneTransitionManager.Instance.LoadScene(storySceneName);
-        }
-        else
-        {
-            Debug.LogError("Критична помилка: SceneTransitionManager не знайдено на сцені! Перевір ієрархію.");
+            MenuCameraController.Instance.MoveToLeftPanel();
         }
     }
 

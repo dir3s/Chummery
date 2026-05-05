@@ -76,23 +76,29 @@ public class DialogueController : MonoBehaviour
         currentNode = node;
         fullText = node.dialogueText;
 
+
+        if (DialogueSaveSystem.Instance != null)
+        {
+            DialogueSaveSystem.Instance.MarkVisited(node.nodeID);
+        }
+
         if (speakerNameDisplay != null)
         {
             bool hasSpeaker = !string.IsNullOrEmpty(node.speakerName);
 
-            // Оновлюємо текст
             speakerNameDisplay.text = hasSpeaker ? node.speakerName : "";
-
-            // ВАЖЛИВО: звертаємось до батьківського об'єкта (плашки), 
-            // щоб вона зникала повністю разом із фоном
             speakerNameDisplay.transform.parent.gameObject.SetActive(hasSpeaker);
         }
 
-        if (node.background != null) backgroundDisplay.sprite = node.background;
+        if (node.background != null)
+            backgroundDisplay.sprite = node.background;
 
-        foreach (Transform child in choiceRoot) Destroy(child.gameObject);
+        foreach (Transform child in choiceRoot)
+            Destroy(child.gameObject);
 
-        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
         typingCoroutine = StartCoroutine(TypeSentence(fullText));
     }
 

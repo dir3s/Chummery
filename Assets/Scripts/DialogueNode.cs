@@ -4,6 +4,9 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "NewDialogueNode", menuName = "Dialogue/Node")]
 public class DialogueNode : ScriptableObject
 {
+    [Header("ID")]
+    public string nodeID;
+
     [Header("Персонаж")]
     public string speakerName;
 
@@ -20,7 +23,6 @@ public class DialogueNode : ScriptableObject
     [Header("Лінійний перехід")]
     public DialogueNode nextLinearNode;
 }
-
 [System.Serializable]
 public class Choice
 {

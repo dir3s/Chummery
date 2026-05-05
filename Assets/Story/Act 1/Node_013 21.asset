@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
   m_Name: Node_013 21
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  nodeID: ti tut
   speakerName: "\u0410\u043B\u044F"
   background: {fileID: 6904444990699376935, guid: 871fd644bb4f76b4baa75a6e8f90e814, type: 3}
   dialogueText: "\u0414\u043E\u0441\u0442\u0430\u0442\u043D\u044C\u043E \u0434\u043E\u0432\u0433\u043E,

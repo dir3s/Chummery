@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
   m_Name: Node_1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  nodeID: gurt
+  speakerName: 
   background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
   dialogueText: "\u0413\u0443\u0440\u0442\u043E\u0436\u0438\u0442\u043E\u043A. \u0412\u0435\u0447\u0456\u0440."
   choices: []
