@@ -22,6 +22,15 @@ public class DialogueNode : ScriptableObject
 
     [Header("Λ³ν³ινθι οεπευ³δ")]
     public DialogueNode nextLinearNode;
+
+    public Object nextScene;
+    [HideInInspector] public string nextSceneName;
+
+    private void OnValidate()
+    {
+        if (nextScene != null) nextSceneName = nextScene.name;
+        else nextSceneName = "";
+    }
 }
 [System.Serializable]
 public class Choice
