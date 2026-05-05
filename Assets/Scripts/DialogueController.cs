@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class DialogueController : MonoBehaviour
 {
@@ -43,10 +44,21 @@ public class DialogueController : MonoBehaviour
 
         if (inputPressed)
         {
-            if (isTyping) FinishTyping();
-            else if (currentNode != null && currentNode.choices.Count == 0 && currentNode.nextLinearNode != null)
+            if (isTyping)
             {
-                DisplayNode(currentNode.nextLinearNode);
+                FinishTyping();
+            }
+            else if (currentNode != null)
+            {
+                if (!string.IsNullOrEmpty(currentNode.nextSceneName))
+                {
+                    SceneManager.LoadScene(currentNode.nextSceneName);
+                    return; 
+                }
+                if (currentNode.choices.Count == 0 && currentNode.nextLinearNode != null)
+                {
+                    DisplayNode(currentNode.nextLinearNode);
+                }
             }
         }
     }
