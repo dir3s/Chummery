@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -14,9 +15,7 @@ public class DialogueController : MonoBehaviour
     [Header("Посилання на UI")]
     public Image backgroundDisplay;
     public TextMeshProUGUI textDisplay;
-    // --- НОВА ЗМІНА ---
     public TextMeshProUGUI speakerNameDisplay;
-    // ------------------
     public Transform choiceRoot;
     public GameObject buttonPrefab;
 
@@ -37,13 +36,18 @@ public class DialogueController : MonoBehaviour
 
     void Update()
     {
-        if (isTransitioning) return;
+        if (isTransitioning || PauseMenu.isPaused) return;
 
         bool inputPressed = (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
                             (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame);
 
         if (inputPressed)
         {
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
+            {
+                return;
+            }
+
             if (isTyping)
             {
                 FinishTyping();
@@ -52,9 +56,11 @@ public class DialogueController : MonoBehaviour
             {
                 if (!string.IsNullOrEmpty(currentNode.nextSceneName))
                 {
-                    SceneManager.LoadScene(currentNode.nextSceneName);
-                    return; 
+                    SceneTransitionManager.Instance.LoadScene(currentNode.nextSceneName);
+                    isTransitioning = true;
+                    return;
                 }
+
                 if (currentNode.choices.Count == 0 && currentNode.nextLinearNode != null)
                 {
                     DisplayNode(currentNode.nextLinearNode);
@@ -91,12 +97,7 @@ public class DialogueController : MonoBehaviour
         if (speakerNameDisplay != null)
         {
             bool hasSpeaker = !string.IsNullOrEmpty(node.speakerName);
-
-            // Оновлюємо текст
             speakerNameDisplay.text = hasSpeaker ? node.speakerName : "";
-
-            // ВАЖЛИВО: звертаємось до батьківського об'єкта (плашки), 
-            // щоб вона зникала повністю разом із фоном
             speakerNameDisplay.transform.parent.gameObject.SetActive(hasSpeaker);
         }
 
@@ -121,15 +122,7 @@ public class DialogueController : MonoBehaviour
             if (IsPunctuation(letter))
             {
                 bool isEndOfPunctuation = (i + 1 >= sentence.Length) || !IsPunctuation(sentence[i + 1]);
-
-                if (isEndOfPunctuation)
-                {
-                    yield return new WaitForSeconds(punctuationPause);
-                }
-                else
-                {
-                    yield return new WaitForSeconds(typingSpeed);
-                }
+                yield return new WaitForSeconds(isEndOfPunctuation ? punctuationPause : typingSpeed);
             }
             else
             {
@@ -141,10 +134,7 @@ public class DialogueController : MonoBehaviour
         CreateChoices();
     }
 
-    private bool IsPunctuation(char c)
-    {
-        return c == '.' || c == '!' || c == '?' || c == '…';
-    }
+    private bool IsPunctuation(char c) => c == '.' || c == '!' || c == '?' || c == '…';
 
     private void FinishTyping()
     {
