@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
   m_Name: act3_3 2
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  speakerName: "\u0410\u043B\u044F"
   background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
   dialogueText: "\u041E, \u0446\u0435 \u0442\u0438 \u0449\u0435 \u043D\u0430 \u0432\u0438\u0449\u0438\u0445
     \u043F\u043E\u0432\u0435\u0440\u0445\u0430\u0445 \u043D\u0435 \u0431\u0443\u0432.
