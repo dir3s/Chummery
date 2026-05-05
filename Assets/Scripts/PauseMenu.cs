@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider typingSpeedSlider;
     public static bool isPaused = false;
 
     void Update()
@@ -59,5 +62,16 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         if (SceneTransitionManager.Instance != null) SceneTransitionManager.Instance.LoadScene("SampleScene");
         else SceneManager.LoadScene("SampleScene");
+    }
+
+    public void OnVolumeChanged(float value)
+    {
+        AudioListener.volume = value;
+    }
+
+    public void OnTypingSpeedChanged(float value)
+    {
+        if (DialogueController.Instance != null)
+            DialogueController.Instance.SetTypingSpeed(value);
     }
 }

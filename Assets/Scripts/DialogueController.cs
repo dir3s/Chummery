@@ -9,17 +9,15 @@ using UnityEngine.SceneManagement;
 
 public class DialogueController : MonoBehaviour
 {
-    [Header("Початкова нода")]
-    public DialogueNode firstNode;
+    public static DialogueController Instance;
 
-    [Header("Посилання на UI")]
+    public DialogueNode firstNode;
     public Image backgroundDisplay;
     public TextMeshProUGUI textDisplay;
     public TextMeshProUGUI speakerNameDisplay;
     public Transform choiceRoot;
     public GameObject buttonPrefab;
 
-    [Header("Налаштування друку")]
     [SerializeField] private float typingSpeed = 0.04f;
     [SerializeField] private float punctuationPause = 0.5f;
 
@@ -28,6 +26,11 @@ public class DialogueController : MonoBehaviour
     private bool isTyping = false;
     private string fullText;
     private Coroutine typingCoroutine;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
     void Start()
     {
@@ -43,15 +46,9 @@ public class DialogueController : MonoBehaviour
 
         if (inputPressed)
         {
-            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
-            {
-                return;
-            }
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null) return;
 
-            if (isTyping)
-            {
-                FinishTyping();
-            }
+            if (isTyping) FinishTyping();
             else if (currentNode != null)
             {
                 if (!string.IsNullOrEmpty(currentNode.nextSceneName))
@@ -67,6 +64,13 @@ public class DialogueController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public float GetCurrentTypingSpeed() => typingSpeed;
+
+    public void SetTypingSpeed(float value)
+    {
+        typingSpeed = value;
     }
 
     public void DisplayNode(DialogueNode node)
@@ -124,10 +128,7 @@ public class DialogueController : MonoBehaviour
                 bool isEndOfPunctuation = (i + 1 >= sentence.Length) || !IsPunctuation(sentence[i + 1]);
                 yield return new WaitForSeconds(isEndOfPunctuation ? punctuationPause : typingSpeed);
             }
-            else
-            {
-                yield return new WaitForSeconds(typingSpeed);
-            }
+            else yield return new WaitForSeconds(typingSpeed);
         }
 
         isTyping = false;
