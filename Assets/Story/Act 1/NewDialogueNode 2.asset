@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
   m_Name: NewDialogueNode 2
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  nodeID: 3
+  speakerName: 
   background: {fileID: 0}
   dialogueText: 
   choices: []
   nextLinearNode: {fileID: 0}
+  nextScene: {fileID: 0}
+  nextSceneName: 

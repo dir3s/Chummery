@@ -29196,6 +29196,7 @@ GameObject:
   - component: {fileID: 1098419385}
   - component: {fileID: 1098419384}
   - component: {fileID: 1098419383}
+  - component: {fileID: 1098419386}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -29297,6 +29298,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098419381}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1098419386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098419381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d7ec1475ca8ef48b5521239309996e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 522841660}
+  minIntensity: 0.2
+  maxIntensity: 1.5
+  flickerChance: 0.2
+  minFlickerTime: 0.05
+  maxFlickerTime: 0.2
+  calmTime: 2
 --- !u!1 &1103864739
 GameObject:
   m_ObjectHideFlags: 0

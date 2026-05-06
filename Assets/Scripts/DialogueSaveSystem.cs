@@ -9,6 +9,7 @@ public class DialogueSaveSystem : MonoBehaviour
     private HashSet<string> visitedNodes = new HashSet<string>();
     private string savePath;
 
+
     private void Awake()
     {
         // Singleton

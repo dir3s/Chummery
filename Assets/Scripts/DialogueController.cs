@@ -27,14 +27,35 @@ public class DialogueController : MonoBehaviour
     private string fullText;
     private Coroutine typingCoroutine;
 
+    [SerializeField] private DialogueNode[] allNodes;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
+
+        Debug.Log("Nodes loaded: " + allNodes.Length);
     }
 
     void Start()
     {
-        if (firstNode != null) UpdateDialogueContent(firstNode);
+        string savedID = SaveLastNode.Load();
+
+        Debug.Log("SAVED ID: " + savedID);
+
+        DialogueNode node = GetNodeByID(savedID);
+
+        Debug.Log("FOUND NODE: " + (node != null ? node.nodeID : "NULL"));
+
+        if (node != null)
+        {
+            UpdateDialogueContent(node);
+            return;
+        }
+
+        Debug.Log("FALLBACK TO FIRST NODE");
+
+        if (firstNode != null)
+            UpdateDialogueContent(firstNode);
     }
 
     void Update()
@@ -98,9 +119,13 @@ public class DialogueController : MonoBehaviour
         currentNode = node;
         fullText = node.dialogueText;
 
+        SaveLastNode.Save(node.nodeID);
+
+
         if (DialogueSaveSystem.Instance != null)
         {
             DialogueSaveSystem.Instance.MarkVisited(node.nodeID);
+            
         }
 
         if (speakerNameDisplay != null)
@@ -159,5 +184,15 @@ public class DialogueController : MonoBehaviour
             btnObj.GetComponentInChildren<TextMeshProUGUI>().text = choice.answerText;
             btnObj.GetComponent<Button>().onClick.AddListener(() => DisplayNode(choice.nextNode));
         }
+    }
+
+    private DialogueNode GetNodeByID(string id)
+    {
+        foreach (var node in allNodes)
+        {
+            if (node.nodeID == id)
+                return node;
+        }
+        return null;
     }
 }
