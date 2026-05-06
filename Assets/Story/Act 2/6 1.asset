@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   nodeID: de vsi
   speakerName: "\u0410\u043B\u044F"
-  background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
+  background: {fileID: -1045133410153605164, guid: 7b6620919f138284681928452603ca2c, type: 3}
   dialogueText: "\u041F\u043E\u043B\u043E\u0432\u0438\u043D\u0430 \u0437\u0430\u0440\u0430\u0437
     \u043D\u0430 \u043F\u0456\u0434\u0440\u043E\u0431\u0456\u0442\u043A\u0430\u0445,
     \u043A\u0443\u0440'\u0454\u0440\u044F\u0442\u044C \u0447\u0438 \u0432 \u043A\u043E\u043B-\u0446\u0435\u043D\u0442\u0440\u0430\u0445
@@ -28,3 +28,5 @@ MonoBehaviour:
     \u043C\u0435\u0440\u0442\u0432\u043E\u0457 \u0442\u0438\u0448\u0456..."
   choices: []
   nextLinearNode: {fileID: 11400000, guid: 009c78344129b46419b7f4556dd053d0, type: 2}
+  nextScene: {fileID: 0}
+  nextSceneName: 
