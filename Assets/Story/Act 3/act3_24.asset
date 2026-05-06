@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   nodeID: 64
   speakerName: "\u041C\u0456\u0442\u0430"
-  background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
+  background: {fileID: 8581962043109515772, guid: c8e3ab561e779604c8b83a9cfeb19ec7, type: 3}
   dialogueText: "\u0410 \u0446\u0435... \u0449\u043E \u0446\u0435 \u0442\u0430\u043A\u0435
     \u0441\u0442\u043E\u0457\u0442\u044C \u0437\u0430 \u0442\u0432\u043E\u0454\u044E
     \u0441\u043F\u0438\u043D\u043E\u044E? \u0422\u0438 \u043F\u043E\u0447\u0430\u043B\u0430
