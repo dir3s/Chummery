@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba63bcbb05a29ce4fa79d24819a76077, type: 3}
   m_Name: act3_16
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  nodeID: 
   speakerName: "\u0410\u043B\u044F"
-  background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
+  background: {fileID: 1376466379556473284, guid: 55a8a2ecc142609408e6db1c19be5d92, type: 3}
   dialogueText: "\u041F\u0440\u043E\u0441\u0442\u043E \u0442\u0440\u0438\u043C\u0430\u0439
     \u0441\u0432\u043E\u044E \u0442\u0435\u0440\u0438\u0442\u043E\u0440\u0456\u044E
     \u0432 \u0447\u0438\u0441\u0442\u043E\u0442\u0456 \u0439 \u043D\u0435 \u043F\u043E\u0440\u0443\u0448\u0443\u0439
@@ -24,3 +25,5 @@ MonoBehaviour:
     \u0441\u0443\u0441\u0456\u0434\u043E\u043C..."
   choices: []
   nextLinearNode: {fileID: 11400000, guid: d4ec475674dee854481d0f1d7935a040, type: 2}
+  nextScene: {fileID: 0}
+  nextSceneName: 

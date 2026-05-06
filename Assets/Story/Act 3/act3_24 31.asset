@@ -31,7 +31,7 @@ MonoBehaviour:
       \u043C\u0435\u043D\u0456 \u0442\u0443\u0442 \u043D\u0435 \u0434\u0443\u0436\u0435
       \u0440\u0430\u0434\u0456"
     nextNode: {fileID: 11400000, guid: af86b1bc12ab60e4e8306b09a8c3cc3a, type: 2}
-  - answerText: "\u0412\u043E\u043D\u0430 \u0449\u0435 \"\u043C\u0438\u043B\u0456\u0448\u0430\",
+  - answerText: "\u0412\u043E\u043D\u0430 \u0449\u0435 \xAB\u043C\u0438\u043B\u0456\u0448\u0430\xBB,
       \u043D\u0456\u0436 \u044F \u0434\u0443\u043C\u0430\u0432."
     nextNode: {fileID: 11400000, guid: a11ec84da74bde741ab30c502d27a2d1, type: 2}
   - answerText: "\u041C\u0456\u0442\u043E, \u0442\u0432\u043E\u044F \u043F\u0440\u043E\u043C\u043E\u0432\u0430
