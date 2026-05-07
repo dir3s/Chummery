@@ -21,4 +21,13 @@ public static class SaveLastNode
             File.ReadAllText(path)
         ).lastNodeID;
     }
+
+    public static void DeleteSave()
+    {
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("Save deleted");
+        }
+    }
 }

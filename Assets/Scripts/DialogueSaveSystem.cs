@@ -21,7 +21,7 @@ public class DialogueSaveSystem : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
+        Debug.Log(Application.persistentDataPath);
         savePath = Application.persistentDataPath + "/nodes.json";
 
         Load();

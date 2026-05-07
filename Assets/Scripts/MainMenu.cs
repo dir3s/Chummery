@@ -35,6 +35,11 @@ public class MainMenu : MonoBehaviour
 
     public void OnStartButtonClick()
     {
+
+        SaveLastNode.DeleteSave();
+        GameState.loadFromSave = false;
+
+
         if (SceneTransitionManager.Instance != null)
         {
             SceneTransitionManager.Instance.LoadScene(startSceneName);
