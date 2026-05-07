@@ -1,11 +1,18 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
+    [Header("Dialogue Nodes")]
+    public string winNodeID;
+    public string loseNodeID;
+    public string sceneNameAfterBattle;
+
+    private bool battleEnded = false;
 
     public bool playerTurn = true;
 
@@ -22,7 +29,6 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private Sprite idleSpritePlayer;
 
     [SerializeField] private Sprite dodgeSprite;
-
     [SerializeField] private Sprite hitSprite;
     [SerializeField] private Sprite hitSpritePlayer;
 
@@ -41,12 +47,16 @@ public class BattleManager : MonoBehaviour
 
     public void StartPlayerTurn()
     {
+        if (battleEnded) return;
+
         playerTurn = true;
         Debug.Log("Player Turn Started");
     }
 
     public void EndPlayerTurn()
     {
+        if (battleEnded) return;
+
         playerTurn = false;
         Debug.Log("Enemy Turn Started");
 
@@ -55,12 +65,16 @@ public class BattleManager : MonoBehaviour
 
     void EnemyTurn()
     {
+        if (battleEnded) return;
+
         Debug.Log("Enemy attacks!");
         StartCoroutine(EnemyAttackRoutine());
     }
 
     public void PlayerAttack()
     {
+        if (battleEnded) return;
+
         Debug.Log("PlayerAttack called");
         StartCoroutine(PlayerAttackRoutine());
     }
@@ -72,104 +86,105 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator PlayerAttackRoutine()
     {
+        if (battleEnded) yield break;
+
         playerTurn = false;
         UIManager.Instance.HideBattleUI();
+
         Vector3 startPos = player.transform.position;
         Vector3 attackPos = enemy.transform.position + new Vector3(-1f, 0, 0);
 
         float t = 0;
 
-
         while (t < 1)
         {
             t += Time.deltaTime;
-            float eased = EaseOutQuad(t);
-
-            player.transform.position =
-                Vector3.Lerp(startPos, attackPos, eased);
-
+            player.transform.position = Vector3.Lerp(startPos, attackPos, EaseOutQuad(t));
             yield return null;
         }
-        player.SetSprite(hitSpritePlayer);
 
+        player.SetSprite(hitSpritePlayer);
         yield return new WaitForSeconds(0.2f);
 
-
         enemy.TakeDamage(20);
+
+        // ✅ WIN CHECK
+        if (enemy.currentHP <= 0 && !battleEnded)
+        {
+            battleEnded = true;
+
+            SaveLastNode.Save(winNodeID);
+            SceneManager.LoadScene(sceneNameAfterBattle);
+            yield break;
+        }
 
         CameraShake.Instance.Shake(0.15f, 0.2f);
         StartCoroutine(Shake(enemy.transform));
 
-
-        player.currentMana += 2;
-        player.currentMana = Mathf.Min(player.currentMana, player.maxMana);
+        player.currentMana = Mathf.Min(player.currentMana + 2, player.maxMana);
         UIManager.Instance.RefreshUI();
+
         yield return new WaitForSeconds(0.3f);
-
-        
-
 
         t = 0;
 
         while (t < 1)
         {
             t += Time.deltaTime * 5f;
-
-            player.transform.position =
-                Vector3.Lerp(attackPos, startPos, t);
-
+            player.transform.position = Vector3.Lerp(attackPos, startPos, t);
             yield return null;
         }
+
         player.SetSprite(idleSpritePlayer);
         EndPlayerTurn();
     }
 
     IEnumerator EnemyAttackRoutine()
     {
-        UIManager.Instance.HideBattleUI();
+        if (battleEnded) yield break;
 
-        playerTurn = false;
+        UIManager.Instance.HideBattleUI();
 
         Vector3 startPos = enemy.transform.position;
         Vector3 attackPos = player.transform.position + new Vector3(1f, 0, 0);
 
         float t = 0;
+
         while (t < 1)
         {
             t += Time.deltaTime;
-            float eased = EaseOutQuad(t);
-
-            enemy.transform.position =
-                Vector3.Lerp(startPos, attackPos, eased);
-
+            enemy.transform.position = Vector3.Lerp(startPos, attackPos, EaseOutQuad(t));
             yield return null;
         }
-
 
         canDodge = true;
         dodged = false;
 
         Debug.Log("DODGE NOW!");
         enemy.SetSprite(hitSprite);
+
         yield return new WaitForSeconds(0.5f);
 
         canDodge = false;
-        
 
         if (dodged)
         {
-            Debug.Log("Player dodged!");
-
- 
             yield return StartCoroutine(DodgeMove(player.transform));
-
-
             CameraShake.Instance.Shake(0.1f, 0.1f);
         }
         else
         {
-            int damage = 15;
-            player.TakeDamage(damage);
+            player.TakeDamage(15);
+
+            // ❌ LOSE CHECK
+            if (player.currentHP <= 0 && !battleEnded)
+            {
+                battleEnded = true;
+
+                SaveLastNode.Save(loseNodeID);
+                SceneManager.LoadScene(sceneNameAfterBattle);
+                yield break;
+            }
 
             CameraShake.Instance.Shake(0.15f, 0.15f);
             StartCoroutine(Shake(player.transform));
@@ -177,17 +192,15 @@ public class BattleManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-
         t = 0;
+
         while (t < 1)
         {
             t += Time.deltaTime * 5f;
-
-            enemy.transform.position =
-                Vector3.Lerp(attackPos, startPos, t);
-
+            enemy.transform.position = Vector3.Lerp(attackPos, startPos, t);
             yield return null;
         }
+
         enemy.SetSprite(idleSpriteEnemy);
         UIManager.Instance.ShowBattleUI();
 
@@ -219,9 +232,6 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator DodgeMove(Transform target)
     {
-        var player = BattleManager.Instance.player;
-
-
         player.SetSprite(dodgeSprite);
 
         Vector3 startPos = target.position;
@@ -247,11 +257,13 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-
-        player.SetSprite(player.idleSprite); 
+        player.SetSprite(idleSpritePlayer);
     }
+
     private void Update()
     {
+        if (battleEnded) return;
+
         if (canDodge && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             dodged = true;

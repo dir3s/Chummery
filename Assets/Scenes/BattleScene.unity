@@ -688,6 +688,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b7b17976a84914e9f26bc7e46c0a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
+  winNodeID: win6
+  loseNodeID: win5
+  sceneNameAfterBattle: StartScene
   playerTurn: 1
   player: {fileID: 1200642563}
   enemy: {fileID: 909131626}
@@ -1171,7 +1174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 49}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -47, y: 3}
+  m_AnchoredPosition: {x: -85.8, y: -3.7}
   m_SizeDelta: {x: 35.88, y: 36.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532296706
@@ -1922,8 +1925,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 215.04997, y: 109}
-  m_SizeDelta: {x: 100, y: 10.91}
+  m_AnchoredPosition: {x: 253.2, y: 124.1}
+  m_SizeDelta: {x: 200, y: 19.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &720017777
 MonoBehaviour:
@@ -5636,8 +5639,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 32.89, y: 4.63}
-  m_SizeDelta: {x: 151.25, y: 19.29}
+  m_AnchoredPosition: {x: 23.3, y: -2.2}
+  m_SizeDelta: {x: 200, y: 19.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2018107815
 MonoBehaviour:
