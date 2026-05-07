@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   nodeID: tikay
   speakerName: "\u0410\u043B\u044F"
-  background: {fileID: -5215294921018556061, guid: e44e9f93ca2782447a8cb996ed73fc47, type: 3}
+  background: {fileID: -1820036083835372325, guid: ba053969a9e880c448e0e20ddf756145, type: 3}
   dialogueText: "\u0422\u0456\u043A\u0430\u0439, \u041C\u0430\u043A\u0441\u0438\u043C\u0435!
     \u0411\u0456\u0436\u0438!!!"
   choices: []
-  nextLinearNode: {fileID: 11400000, guid: 5357ab7e785286e418cf4f80bec172ca, type: 2}
+  nextLinearNode: {fileID: 0}
   nextScene: {fileID: 102900000, guid: 6c6b63e8de873b046ab5af6d20c1b730, type: 3}
   nextSceneName: Running 2D
