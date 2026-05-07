@@ -35402,7 +35402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffffff9fdb2eb0645b3218f19415d1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChangeTrigger
-  sceneName: BattleScene
+  sceneName: StartScene
+  nodeToLoad: {fileID: 11400000, guid: 45b6ae8cabfa5d14eb518e0874db6a94, type: 2}
 --- !u!1 &1380674027
 GameObject:
   m_ObjectHideFlags: 0

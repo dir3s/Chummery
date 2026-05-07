@@ -3,15 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class LevelEndDoor : MonoBehaviour
 {
-    public string nextSceneName = "Running 3D";
+    public string nextSceneName = "StartScene";
+
+    [Header("Dialogue")]
+    public DialogueNode nodeToLoad;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("TOUCHED: " + other.name);
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        Debug.Log("Level Complete!");
+
+        if (nodeToLoad != null)
         {
-            Debug.Log("Level Complete!");
-            SceneManager.LoadScene(nextSceneName);
+            SaveLastNode.Save(nodeToLoad.nodeID);
         }
+
+        SceneManager.LoadScene(nextSceneName);
     }
 }
